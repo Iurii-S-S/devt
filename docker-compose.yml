@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: traveldream_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-traveldream}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-password}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - traveldream-network
+
+  backend:
+    build: ./backend
+    container_name: traveldream_backend
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=${DB_NAME:-traveldream}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-password}
+      - JWT_SECRET=${JWT_SECRET:-default_jwt_secret}
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    networks:
+      - traveldream-network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: traveldream_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - traveldream-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  traveldream-network:
+    driver: bridge
