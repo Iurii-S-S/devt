@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Туры - TravelDream</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span>🌴 TravelDream</span>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="tours.html" class="active">Туры</a></li>
+                        <li><a href="#about">О нас</a></li>
+                        <li><a href="#contact">Контакты</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="auth.html" class="btn-login">Войти</a>
+                    <a href="register.html" class="btn-register">Регистрация</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="tours-page">
+        <div class="container">
+            <h1>Все туры</h1>
+            
+            <div class="filters">
+                <select id="countryFilter">
+                    <option value="">Все страны</option>
+                    <option value="Турция">Турция</option>
+                    <option value="Египет">Египет</option>
+                    <option value="Тайланд">Тайланд</option>
+                </select>
+                
+                <select id="priceFilter">
+                    <option value="">Любая цена</option>
+                    <option value="0-30000">до 30 000 ₽</option>
+                    <option value="30000-50000">30 000 - 50 000 ₽</option>
+                    <option value="50000-100000">от 50 000 ₽</option>
+                </select>
+            </div>
+            
+            <div class="tours-grid" id="toursContainer">
+                <!-- Туры будут загружены через JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TravelDream. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="js/tours.js"></script>
+</body>
+</html>
